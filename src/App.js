@@ -4,7 +4,11 @@ import Addresses from './Addresses'
 
 class App extends Component {
   render() {
-    return <Addresses />
+    return (
+      <div>
+        <Addresses />
+      </div>
+    )
   }
 }
 

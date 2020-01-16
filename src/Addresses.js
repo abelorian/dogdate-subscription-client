@@ -1,6 +1,6 @@
-import React, { Component } from 'react'
+import React from 'react'
 import AddressesView from './AddressesView'
-import { Query } from 'react-apollo'
+import { useQuery } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 
 const ADDRESS = gql`
@@ -24,45 +24,37 @@ const NEW_ADDRESS = gql`
   }
 `
 
-class Address extends Component {
-  render() {
-    return (
-      <Query query={ADDRESS}>
-        {({ loading, error, data, subscribeToMore }) => {
-          if (loading) return <div>Loading...</div>
-          if (error) return <div>Error</div>
+function Address(){
+  const { loading, error, data, subscribeToMore } = useQuery(ADDRESS)
 
-          const more = ()  =>   subscribeToMore({
-            document: NEW_ADDRESS,
-            updateQuery: (prev, { subscriptionData }) => {
-              console.log("updateQuery")
+  if (loading) return <div>Loading...</div>
+  if (error) return <div>Error</div>
 
-              if (!subscriptionData.data) return prev
+  const more = ()  =>   subscribeToMore({
+    document: NEW_ADDRESS,
+    updateQuery: (prev, { subscriptionData }) => {
+      console.log("updateQuery")
 
-              const newAddress = subscriptionData.data.newAddress
+      if (!subscriptionData.data) return prev
 
-              return Object.assign({}, prev, {
-                addresses: [...prev.addresses, newAddress],
-                __typename: "Address"
-              })
+      const newAddress = subscriptionData.data.newAddress
 
-            }
-          })
+      return Object.assign({}, prev, {
+        addresses: [...prev.addresses, newAddress],
+        __typename: "Address"
+      })
 
-          console.log("query 1")
+    }
+  })
 
-          const addresses = [...new Map(data.addresses.map(o => [o.id, o])).values()]
+  const addresses = [...new Map(data.addresses.map(o => [o.id, o])).values()] // remove duplicated
 
-          return (
-            <div>
-              <h3>Addresses</h3>
-              <AddressesView data={addresses} subscribeToMore={more} />
-            </div>
-          )
-        }}
-      </Query>
+  return (
+    <div>
+      <h3>Addresses</h3>
+      <AddressesView data={addresses} subscribeToMore={more} />
+    </div>
     )
-  }
 }
 
 export default Address
