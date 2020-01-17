@@ -2,13 +2,15 @@ import React, { Component } from 'react';
 import './App.css';
 import Addresses from './Addresses'
 import DogDateData from './DogDateData'
+import Matchs from './Matchs'
 
 class App extends Component {
   render() {
     return (
       <div>
-        <Addresses />
+        <Matchs />
         <DogDateData />
+        <Addresses />
       </div>
     )
   }
