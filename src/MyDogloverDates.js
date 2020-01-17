@@ -18,7 +18,7 @@ const MY_DOGLOVER_DATES = gql`
 
 const UPDATE_DOG_DATE = gql`
   subscription {
-    dogDate {
+    dogloverDate {
       id
       state
       startsAt
@@ -39,7 +39,7 @@ function MyDogloverDates(){
 
       if (!subscriptionData.data) return prev
 
-      const dogDate = subscriptionData.data.dogDate
+      const dogDate = subscriptionData.data.dogloverDate
 
       return Object.assign({}, prev, {
         myDogloverDates: [...prev.myDogloverDates, dogDate],
