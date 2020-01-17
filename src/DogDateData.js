@@ -7,6 +7,7 @@ import DogDate from './DogDate'
 const DOGDATE = gql`
   query {
     dogDate(id: 1) {
+      id
       state
       startsAt
       updatedAt
@@ -16,6 +17,7 @@ const DOGDATE = gql`
 const UPDATE_DOG_DATE = gql`
   subscription {
     dogDateUpdate(id: 1) {
+      id
       state
       startsAt
       updatedAt
@@ -50,7 +52,7 @@ function DogDateData() {
   const more = ()  =>   subscribeToMore({
     document: UPDATE_DOG_DATE,
     updateQuery: (prev, { subscriptionData }) => {
-      console.log("updateQuery")
+      console.log("update DogDate")
 
       if (!subscriptionData.data) return prev
 
@@ -65,7 +67,10 @@ function DogDateData() {
   })
 
   console.log(data)
-  return <DogDate subscribeToMore={more} data={data}/>
+  return <div>
+    <h2>Dog id: 1</h2>
+    <DogDate subscribeToMore={more} data={[data.dogDate]}/>
+  </div>
 }
 
 export default DogDateData

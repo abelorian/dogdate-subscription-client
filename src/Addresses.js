@@ -33,7 +33,7 @@ function Address(){
   const more = ()  =>   subscribeToMore({
     document: NEW_ADDRESS,
     updateQuery: (prev, { subscriptionData }) => {
-      console.log("updateQuery")
+      console.log("update Addresses")
 
       if (!subscriptionData.data) return prev
 

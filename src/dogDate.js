@@ -11,10 +11,11 @@ class DogDate extends Component {
     console.log(data)
     return (
       <div>
-        <h2>Dog id: 1</h2>
-        <p>state: {data.dogDate.state}</p>
-        <p>startAt: {data.dogDate.startsAt}</p>
-        <p>updatedAt: {data.dogDate.updatedAt}</p>
+      {data.map(dogDate =>
+        <div key={dogDate.id}>
+          <p>id: {dogDate.id} | state: {dogDate.state} | startAt: {dogDate.startsAt} | updatedAt: {dogDate.updatedAt}</p>
+        </div>
+      )}
       </div>
     )
   }
