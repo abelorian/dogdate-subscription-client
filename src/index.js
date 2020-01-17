@@ -16,8 +16,9 @@ const httpLink = createHttpLink({
   uri: 'http://localhost:3000/graphql',
   credentials: 'include'
 })
-const auth_token = "QW2aNu7iEr8CyQSn_HbbNLsoUZsBrisgKuZ3oeMgzjJswQxXbA"
-const cable = ActionCable.createConsumer('ws://localhost:3000/cable?token=' + auth_token)
+
+const auth_token = ["QW2aNu7iEr8CyQSn_HbbNLsoUZsBrisgKuZ3oeMgzjJswQxXbA", "f-EXUW5pCnc8Ymi-7YZn-Cx-BTTvFZFSQZCmQm_9Hs5GTVzDRQ"][0]
+const cable = ActionCable.createConsumer('ws://localhost:3000/cable')
 
 const hasSubscriptionOperation = ({ query: { definitions } }) => {
   return definitions.some(
