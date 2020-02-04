@@ -13,7 +13,8 @@ class Match extends Component {
       <div>
       <h2>My Matchs</h2>
       { data.map(match =>
-        <p key={match.id}>Match: {match.id} | {match.state} | {match.rating} | {match.expiresAt} | {match.dogDate.owner.fullName}</p>
+        match.deletedAt == null ?
+        <p key={match.id}>Match: {match.id} | {match.state} | {match.rating} | {match.expiresAt} | {match.dogDate.owner.fullName} | {match.deletedAt}</p> : ''
       )}
       </div>
     )

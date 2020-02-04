@@ -10,6 +10,7 @@ const MYMATCHS = gql`
     rating
     state
     expiresAt
+    deletedAt
     dogDate{
       id
       owner{
@@ -27,6 +28,7 @@ subscription{
     rating
     state
     expiresAt
+    deletedAt
     dogDate{
       id
       owner{

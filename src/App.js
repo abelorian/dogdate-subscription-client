@@ -10,9 +10,9 @@ class App extends Component {
   render() {
     return (
       <div>
+        <Matchs />
         <MyDogloverDates />
         <MyDogDates />
-        <Matchs />
         <DogDateData />
         <Addresses />
       </div>
